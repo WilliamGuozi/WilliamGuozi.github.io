@@ -1,6 +1,6 @@
 ##William_Guozi的个人小站
 
-#### 博客园：http://www.cnblogs.com/William-Guozi 
+#### 博客园：https://www.cnblogs.com/William-Guozi 
 
 #### 微博：https://weibo.com/u/1002870827 
 
@@ -17,8 +17,6 @@
 #### Github：https://github.com/WilliamGuozi
 
 #### 斗鱼：https://www.douyu.com/2018990
-
-#### Github: https://williamguozi.github.io
 
 #### Docker hub: https://hub.docker.com/u/william1007/
 

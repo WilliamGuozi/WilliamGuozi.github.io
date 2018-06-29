@@ -1,10 +1,12 @@
 ##William_Guozi的个人小站
 
+>#### 个人站点: <http://www.glinux.top/>
+####
 >#### 博客园: <https://www.cnblogs.com/William-Guozi>
 ####
 >#### 微博: <https://weibo.com/u/1002870827 >
 ####
->#### 个人站点: <http://www.glinux.top/>
+>#### 个人论坛: <http://phpbb.glinux.top/>
 ####
 >#### 慕课网: <https://www.imooc.com/u/1044492/courses>
 ####
@@ -15,6 +17,8 @@
 >#### 简书: <https://www.jianshu.com/u/3e9414a1682b>
 ####
 >#### Github: <https://github.com/WilliamGuozi>
+####
+>#### Github page: <https://WilliamGuozi.github.io>
 ####
 >#### 斗鱼: <https://www.douyu.com/2018990>
 ####

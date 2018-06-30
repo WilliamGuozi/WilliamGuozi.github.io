@@ -1,7 +1,5 @@
 ##William_Guozi的个人小站
 
->#### 个人站点: <https://www.glinux.top/>
-####
 >#### 博客园: <https://www.cnblogs.com/William-Guozi>
 ####
 >#### 微博: <https://weibo.com/u/1002870827 >

@@ -10,6 +10,8 @@
 ####
 >#### 腾讯课堂: <https://ke.qq.com/user/index/index.html#sid=signup>
 ####
+>#### 中国大学MOOC: <https://www.icourse163.org/home.htm?userId=7439947#/home/course>
+####
 >#### Keep: <https://show.gotokeep.com/users/5907eed431f1162eb136c7b8>
 ####
 >#### 简书: <https://www.jianshu.com/u/3e9414a1682b>

@@ -113,8 +113,8 @@
 
     <footer id="bottom">
       <p align="center">&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}
-        with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
-        and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        with help from <a href="http://jekyllbootstrap.com" target="_self" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+        and <a href="http://twitter.github.com/bootstrap/" target="_self">Twitter Bootstrap</a>
       </p>
       <p align="center">
     {% include widgets/uvpv_stat %}
@@ -123,7 +123,7 @@
   </div>
 
   <script type="text/javascript">
-    $('article.post a').attr('target', '_blank');
+    $('article.post a').attr('target', '_self');
     if (navigator.appVersion.indexOf("Mac") != -1) {
       $('code, pre').css('font-family', 'Courier, monospace');
     }

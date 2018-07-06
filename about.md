@@ -3,10 +3,11 @@ layout: page
 title: About 
 permalink: /about
 ---
+{% include JB/setup %}
+<img style="margin-top: 30px;" src="{{ ASSET_PATH }}/img/seal.png">
 
 熟悉的
 
-* php lua shell python golang
 * nginx
 * memcache redis
 * mysql

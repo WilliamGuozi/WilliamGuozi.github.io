@@ -12,6 +12,8 @@
 
 >#### 中国大学MOOC: <https://www.icourse163.org/home.htm?userId=7439947#/home/course>
 
+>#### 51CTO学院: <http://edu.51cto.com/center/course/user/study-info>
+
 >#### Keep: <https://show.gotokeep.com/users/5907eed431f1162eb136c7b8>
 
 >#### 简书: <https://www.jianshu.com/u/3e9414a1682b>

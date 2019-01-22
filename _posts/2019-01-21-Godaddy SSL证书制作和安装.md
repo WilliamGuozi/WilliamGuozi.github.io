@@ -73,7 +73,8 @@ An optional company name []:
 
 ![img-w500](/images/201901211912.png) 
 
-> 更新配置文件以使用 SSL 证书
+> 更新配置文件以使用 SSL 证书  
+
 ```
     server {
         listen       80 default_server;

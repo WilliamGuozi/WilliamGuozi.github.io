@@ -20,14 +20,16 @@
 
 >#### Github page: <https://WilliamGuozi.github.io>
 
-<!-->#### 斗鱼: <https://www.douyu.com/2018990>-->
-
 >#### Docker hub: <https://hub.docker.com/u/williamguozi>
 
->~~~#### 个人论坛: <http://phpbb.glinux.top/>~~~
+<!--
+>#### 斗鱼: <https://www.douyu.com/2018990>
 
->~~~#### Weadmin: <http://weadmin.glinux.top>~~~
+>#### 个人论坛: <http://phpbb.glinux.top/>
 
->~~~#### Mail: <http://mail.glinux.top>~~~
+>#### Weadmin: <http://weadmin.glinux.top>
 
->~~~#### Zabbix: <http://zabbix.glinux.top>~~~
+>#### Mail: <http://mail.glinux.top>
+
+>#### Zabbix: <http://zabbix.glinux.top>
+-->

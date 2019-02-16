@@ -4,8 +4,6 @@
 
 >#### 微博: <https://weibo.com/u/1002870827 >
 
->#### 个人论坛: <http://phpbb.glinux.top/>
-
 >#### 慕课网: <https://www.imooc.com/u/1044492/courses>
 
 >#### 腾讯课堂: <https://ke.qq.com/user/index/index.html#sid=signup>
@@ -22,12 +20,14 @@
 
 >#### Github page: <https://WilliamGuozi.github.io>
 
->#### 斗鱼: <https://www.douyu.com/2018990>
+<!-->#### 斗鱼: <https://www.douyu.com/2018990>-->
 
 >#### Docker hub: <https://hub.docker.com/u/williamguozi>
 
->#### Weadmin: <http://weadmin.glinux.top>
+>~~~#### 个人论坛: <http://phpbb.glinux.top/>~~~
 
->#### Mail: <http://mail.glinux.top>
+>~~~#### Weadmin: <http://weadmin.glinux.top>~~~
 
->#### Zabbix: <http://zabbix.glinux.top>
+>~~~#### Mail: <http://mail.glinux.top>~~~
+
+>~~~#### Zabbix: <http://zabbix.glinux.top>~~~

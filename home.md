@@ -2,6 +2,14 @@
 
 >#### 博客园: <https://www.cnblogs.com/William-Guozi>
 
+>#### Github: <https://github.com/WilliamGuozi>
+
+>#### Github page: <https://WilliamGuozi.github.io>
+
+>#### Docker hub: <https://hub.docker.com/u/williamguozi>
+
+>#### Keep: <https://show.gotokeep.com/users/5907eed431f1162eb136c7b8>
+
 >#### 微博: <https://weibo.com/u/1002870827 >
 
 >#### 慕课网: <https://www.imooc.com/u/1044492/courses>
@@ -12,15 +20,7 @@
 
 >#### 51CTO学院: <http://edu.51cto.com/center/course/user/study-info>
 
->#### Keep: <https://show.gotokeep.com/users/5907eed431f1162eb136c7b8>
-
 >#### 简书: <https://www.jianshu.com/u/3e9414a1682b>
-
->#### Github: <https://github.com/WilliamGuozi>
-
->#### Github page: <https://WilliamGuozi.github.io>
-
->#### Docker hub: <https://hub.docker.com/u/williamguozi>
 
 <!--
 >#### 斗鱼: <https://www.douyu.com/2018990>

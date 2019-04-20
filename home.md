@@ -14,8 +14,6 @@
 
 >#### 微博: <https://weibo.com/u/1002870827 >
 
->#### coursera: <https://www.coursera.org/?skipBrowseRedirect=true>
-
 >#### 慕课网: <https://www.imooc.com/u/1044492/courses>
 
 >#### 腾讯课堂: <https://ke.qq.com/user/index/index.html#sid=signup>
@@ -27,6 +25,8 @@
 >#### 简书: <https://www.jianshu.com/u/3e9414a1682b>
 
 <!--
+>#### coursera: <https://www.coursera.org/?skipBrowseRedirect=true>
+
 >#### 斗鱼: <https://www.douyu.com/2018990>
 
 >#### 个人论坛: <http://phpbb.glinux.top/>

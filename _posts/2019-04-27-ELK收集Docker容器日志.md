@@ -4,11 +4,13 @@ title: "ELK收集Docker容器日志"
 tags: DevOps ELK 
 ---
 
-## 简介
+## 简介  
+
 * 之前写过一篇博客 [ELK：日志收集分析平台](https://www.cnblogs.com/William-Guozi/p/elk.html)，介绍了在Centos7系统上部署配置使用ELK的方法，随着容器化时代的到来，容器化部署成为一种很方便的部署方式，收集容器日志也成为刚需。本篇文档从 **容器化部署ELK系统，收集容器日志，自动建立项目索引，ElastAlert日志监控报警，定时删除过期日志索引文件** 这几个方面来介绍ELK。
 * 大部分配置方法多是看官方文档，理解很辛苦，查了很多文章，走了很多弯路，分享出来，希望让有此需求的朋友少走弯路，如有错误或理解不当的地方，请批评指正。
 
-## ELK之容器日志收集及索引建立
+## ELK之容器日志收集及索引建立  
+
 * Docker环境下，拉取官方镜像，官方镜像地址 [Docker @ Elastic](https://www.docker.elastic.co)
 ```bash
 docker pull docker.elastic.co/elasticsearch/elasticsearch:6.6.2
@@ -20,7 +22,8 @@ docker pull docker.elastic.co/logstash/logstash:6.6.2
 
 ### Elasticsearch 容器部署  
 
-#### Elasticsearch 启动命令说明
+#### Elasticsearch 启动命令说明  
+
 * 启动两个端口，9200为数据查询和写入端口，也即是业务端口，9300为集群端口，同步集群数据，此处我单节点部署
 * 指定日志输出格式为json格式
 * 日志文件最多保留三个，每个最多10M
@@ -45,6 +48,7 @@ docker run -d \
     
 chmod 777 -R /data/elasticsearch
 ```
+
 ### Logstash 容器部署  
 
 #### Logstash 配置文件说明  
@@ -85,6 +89,7 @@ EOF
 ```  
 
 #### Logstash 启动命令说明  
+
 * 通过 `--link elasticsearch` 连接 `elasticsearch` 容器，并生成环境变量在容器中使用
 * 配置文件映射如容器  
 
@@ -100,6 +105,7 @@ docker run -p 5043:5043 -d \
     -v /data/conf/logstash.conf:/usr/share/logstash/pipeline/logstash.conf \
     docker.elastic.co/logstash/logstash:6.6.2
 ```
+
 ### Kibana容器部署  
 
 * 启动参数参考上述组件
@@ -116,9 +122,11 @@ docker run -p 5601:5601 -d \
     docker.elastic.co/kibana/kibana:6.6.2
 ```
 * 通过服务器IP地址即可访问Kibana web `http://IP:5601`
+
 ### Filebeat 容器部署  
 
-#### Filebeat 配置文件说明
+#### Filebeat 配置文件说明  
+
 * 
 ```yaml
 cat > /data/conf/filebeat.yml << "EOF"
@@ -167,7 +175,8 @@ output.logstash: # 输出地址
 EOF
 ```  
 
-#### Filebeat 启动命令
+#### Filebeat 启动命令  
+
 ```bash
 docker run -d \
     --name filebeat \
@@ -185,5 +194,6 @@ docker run -d \
 
 * Filebeat是日志收集客户端，正常情况下其部署在需要收集日志的主机上
 
-## ELK之ElastAlert日志告警
-## 定时删除过期日志索引文件
+## ELK之ElastAlert日志告警  
+
+## 定时删除过期日志索引文件  

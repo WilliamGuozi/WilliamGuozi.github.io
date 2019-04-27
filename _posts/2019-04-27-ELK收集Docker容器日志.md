@@ -127,7 +127,8 @@ docker run -p 5601:5601 -d \
 
 #### Filebeat 配置文件说明  
 
-* 待续
+* 待续  
+
 ```yaml
 cat > /data/conf/filebeat.yml << "EOF"
 filebeat.inputs:

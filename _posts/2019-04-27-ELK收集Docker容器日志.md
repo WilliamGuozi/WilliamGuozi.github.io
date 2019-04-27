@@ -18,7 +18,8 @@ docker pull docker.elastic.co/logstash/logstash:6.6.2
 ```
 
 
-### Elasticsearch 容器部署
+### Elasticsearch 容器部署  
+
 > Elasticsearch 启动命令说明
 * 启动两个端口，9200为数据查询和写入端口，也即是业务端口，9300为集群端口，同步集群数据，此处我单节点部署
 * 指定日志输出格式为json格式
@@ -26,7 +27,8 @@ docker pull docker.elastic.co/logstash/logstash:6.6.2
 * 容器开机自启
 * 传递参数为单节点部署
 * 数据存储映射至宿主机
-* 需要给 `/data/elasticsearch` 赋予权限，否则报权限不足的错误
+* 需要给 `/data/elasticsearch` 赋予权限，否则报权限不足的错误  
+
 ```bash
 docker run -d \
     --user root \
@@ -43,7 +45,8 @@ docker run -d \
     
 chmod 777 -R /data/elasticsearch
 ```
-### Logstash 容器部署
+### Logstash 容器部署  
+
 > Logstash 配置文件说明  
 
 * 配置文件映射至至宿主机
@@ -51,7 +54,8 @@ chmod 777 -R /data/elasticsearch
 ` 将日志做简单拆分, 时间戳重命名为 `log-timestamp`，日志级别重命名为 `log-msg`
 * 通过 `remove_field => ["beat"]` 移除无用字段
 * 输出到elasticsearch
-* 索引通过 容器名称-时间 建立
+* 索引通过 容器名称-时间 建立  
+
 ```yaml
 mkdir -pv /data/conf
 cat > /data/conf/logstash.conf << "EOF"
@@ -78,10 +82,12 @@ output {
   }
 }
 EOF
-```
+```  
+
 > Logstash 启动命令说明  
 * 通过 `--link elasticsearch` 连接 `elasticsearch` 容器，并生成环境变量在容器中使用
-* 配置文件映射如容器
+* 配置文件映射如容器  
+
 ```bash
 docker run -p 5043:5043 -d \
     --user root \
@@ -94,7 +100,8 @@ docker run -p 5043:5043 -d \
     -v /data/conf/logstash.conf:/usr/share/logstash/pipeline/logstash.conf \
     docker.elastic.co/logstash/logstash:6.6.2
 ```
-### Kibana容器部署
+### Kibana容器部署  
+
 * 启动参数参考上述组件
 ```bash
 docker run -p 5601:5601 -d \
@@ -109,7 +116,8 @@ docker run -p 5601:5601 -d \
     docker.elastic.co/kibana/kibana:6.6.2
 ```
 * 通过服务器IP地址即可访问Kibana web `http://IP:5601`
-### Filebeat 容器部署
+### Filebeat 容器部署  
+
 > Filebeat 配置文件说明
 * 
 ```yaml
@@ -157,7 +165,8 @@ output.logstash: # 输出地址
 #output.console:
 #  pretty: true
 EOF
-```
+```  
+
 > Filebeat 启动命令
 ```bash
 docker run -d \

@@ -108,7 +108,22 @@ docker run -p 5043:5043 -d \
 
 ### Kibana容器部署  
 
-* 启动参数参考上述组件
+#### Kibana配置文件说明
+
+```yaml
+
+# Default Kibana configuration from kibana-docker.
+
+server.name: kibana
+server.host: "0"
+elasticsearch.hosts: http://elasticsearch:9200
+xpack.monitoring.ui.container.elasticsearch.enabled: true
+elastalert-kibana-plugin.serverHost: 192.168.30.42
+elastalert-kibana-plugin.serverPort: 3030
+```
+
+* 启动参数参考上述组件  
+
 ```bash
 docker run -p 5601:5601 -d \
     --user root \
@@ -119,6 +134,8 @@ docker run -p 5601:5601 -d \
     --link elasticsearch \
     --restart=always \
     -e ELASTICSEARCH_URL=http://elasticsearch:9200 \
+    -v /data/conf/kibana.yml:/usr/share/kibana/config/kibana.yml \
+    -v /data/elastalert-kibana-plugin:/usr/share/kibana/plugins/elastalert-kibana-plugin \
     docker.elastic.co/kibana/kibana:6.6.2
 ```
 * 通过服务器IP地址即可访问Kibana web `http://IP:5601`
@@ -223,19 +240,105 @@ docker run -d \
 * 如此便可查看相关日志  
 ![img-w500](/images/201905011747.png)
 
-## ELK之ElastAlert日志告警  
+## ELK之ElastAlert日志告警 
+
+### ElastAlert容器启动 
 
 ```bash
 git clone https://github.com/bitsensor/elastalert.git; cd elastalert
+sed -i -e 's/localhost/elasticsearch/g' `pwd`/config/elastalert.yaml
 docker run -d \
     -p 3030:3030 \
     -v `pwd`/config/elastalert.yaml:/opt/elastalert/config.yaml \
     -v `pwd`/config/config.json:/opt/elastalert-server/config/config.json \
     -v `pwd`/rules:/opt/elastalert/rules \
     -v `pwd`/rule_templates:/opt/elastalert/rule_templates \
-    --net="host" \
+    --link elasticsearch \
     --name elastalert \
     bitsensor/elastalert:latest
 ```
 
+### Kibana 需要更改配置
+
+```yaml
+cat > /data/conf/kibana.yml << "EOF"
+# Default Kibana configuration from kibana-docker.
+
+server.name: kibana
+server.host: "0"
+elasticsearch.hosts: http://elasticsearch:9200
+xpack.monitoring.ui.container.elasticsearch.enabled: true
+elastalert-kibana-plugin.serverHost: elastalert
+elastalert-kibana-plugin.serverPort: 3030
+```
+
+### Kibana 启动参数更改
+
+```bash
+docker run -p 5601:5601 -d \
+    --user root \
+    --log-driver json-file \
+    --log-opt max-size=10m \
+    --log-opt max-file=3 \
+    --name kibana \
+    --link elasticsearch \
+    --link elastalert \
+    --restart=always \
+    -e ELASTICSEARCH_URL=http://elasticsearch:9200 \
+    -v /data/conf/kibana.yml:/usr/share/kibana/config/kibana.yml \
+    -v /data/elastalert-kibana-plugin:/usr/share/kibana/plugins/elastalert-kibana-plugin \
+    docker.elastic.co/kibana/kibana:6.6.2
+
+docker exec -it kibana bash
+kibana-plugin install https://github.com/bitsensor/elastalert-kibana-plugin/releases/download/1.0.2/elastalert-kibana-plugin-1.0.2-6.6.2.zip
+echo "elastalert-kibana-plugin.serverHost: elastalert" >> config/kibana.yml
+echo "elastalert-kibana-plugin.serverPort: 3030">> config/kibana.yml
+docker restart kibana ;docker logs kibana -f
+```
+
+
 ## 定时删除过期日志索引文件  
+
+```bash
+cat > /data/delete_index.sh << "EOF"
+#!/bin/bash
+
+elastic_url=127.0.0.1
+elastic_port=9200
+user="username"
+pass="password"
+log="/data/log/delete_index.log"
+
+
+# 当前日期时间戳减去索引名时间转化时间戳是否大于1
+dateDiff (){
+    dte1=$1
+    dte2=$2
+    diffSec=$((dte1-dte2))
+    if ((diffSec > 6)); then
+	echo "1"
+    else
+        echo "0"
+    fi
+}
+
+
+# 循环获取索引文件，通过正则匹配过滤
+for index in $(curl -s "${elastic_url}:${elastic_port}/_cat/indices?v" | awk -F' ' '{print $3}' | grep -E "[0-9]{4}.[0-9]{2}.[0-9]{2}$"); do
+# 获取索引文件日期，并转化格式
+  date=$(echo $index | awk -F'-' '{print $NF}' | sed -n 's/\.//p' | sed -n 's/\.//p')
+# 获取当前日期
+  cond=$(date '+%Y%m%d')
+# 根据不同服务器，计算不同数值
+  diff=$(dateDiff "${cond}" "${date}")
+# 打印索引名和结果数值
+  #echo -n "${index} (${diff})"
+
+# 判断结果值是否大于等于1
+  if [ $diff -eq 1 ]; then
+    curl -XDELETE -s "${elastic_url}:${elastic_port}/${index}" && echo "${index} 删除成功" >> $log || echo "${index} 删除失败" >> $log
+fi
+done
+EOF
+
+```

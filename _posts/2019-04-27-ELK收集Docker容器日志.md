@@ -25,7 +25,7 @@ docker pull docker.elastic.co/logstash/logstash:6.6.2
 #### Elasticsearch 启动命令说明  
 
 * 启动两个端口，9200为数据查询和写入端口，也即是业务端口，9300为集群端口，同步集群数据，此处我单节点部署
-* 指定日志输出格式为json格式
+* 指定日志输出格式为json格式，默认情况下也为json格式，默认输出路径 `/var/lib/docker/containers/*/*.log`
 * 日志文件最多保留三个，每个最多10M
 * 容器开机自启
 * 传递参数为单节点部署
@@ -55,7 +55,7 @@ chmod 777 -R /data/elasticsearch
 
 * 配置文件映射至至宿主机
 * `match => { "message" => "%{TIMESTAMP_ISO8601:log-timestamp} %{LOGLEVEL:log-level} %{JAVALOGMESSAGE:log-msg}" }
-` 将日志做简单拆分, 时间戳重命名为 `log-timestamp`，日志级别重命名为 `log-msg`
+` 将日志做简单拆分, 时间戳重命名为 `log-timestamp`，日志级别重命名为 `log-msg`，如果拆分成功输出日志中就会产生这两个字段
 * 通过 `remove_field => ["beat"]` 移除无用字段
 * 输出到elasticsearch
 * 索引通过 容器名称-时间 建立  
@@ -127,7 +127,18 @@ docker run -p 5601:5601 -d \
 
 #### Filebeat 配置文件说明  
 
-* 待续  
+* Filebeat是一个轻量级的日志收集工具，是Elastic的Beat组成员，默认情况下，docker输出的日志格式为json格式，需要解码才方便查看日志的路径为 `/var/lib/docker/containers/*/*.log`
+* `- type: log` 选择filebeat输入类型选择log，之后通过解码json的配置将docker输出的日志解码，输入类型也可选择docker，但是我试过目前版本该数据类型有些功能受限，比如后面rename时，只能rename一个
+* json解码： 必须至少指定设置其中之一来启用JSON解析模式，建议三行都加上，不然，有些功能会有问题
+* json.overwrite_keys   #如果启用了keys_under_root和此设置，那么来自解码的JSON对象的值将覆盖Filebeat通常添加的字段（type, source, offset,等）以防冲突。
+* json.add_error_key    #如果启用此设置，则在出现JSON解组错误或配置中定义了message_key但无法使用的情况下，Filebeat将添加“error.message”和“error.type：json”键。
+* json.message_key      #一个可选的配置设置，用于指定应用行筛选和多行设置的JSON密钥。 如果指定，键必须位于JSON对象的顶层，且与键关联的值必须是字符串，否则不会发生过滤或多行聚合。
+* 多行合并： 将多行日志合并成一条，比如java的报错日志，规则为，如果不是以四个数字，即年份开头的日志合并到上一条日志当中
+* 排除或删除通配符行： 即排除含有相关关键字的行，或只收集含有相关关键字的行
+* 排除通配文件： 即不读取该含该字符的文件的日志
+* 添加docker元数据： 将docker容器的相关数据收集起来，方便作为索引的字段， `match_source_index: 4` 为获取docker数据的索引，其数据为json格式，索引太低可能无法获取关键docker数据
+* 处理器重命名和删除无用字段： `- rename:` 将上面收集的元数据重命名来提升其索引等级，以便交给logstash来处理，其中 `docker.container.name` 为docker容器的名字，重命名为 `containername`字段， `- drop_fields:` 清除掉无用索引数据，不输出到 output
+* 日志输出：日志输出的几种方式 `output.file` 输出到文件，`output.console` 输出到标准输出，通过 `docker logs containName` 查看，该两种输出方便调试  
 
 ```yaml
 cat > /data/conf/filebeat.yml << "EOF"
@@ -135,23 +146,29 @@ filebeat.inputs:
 - type: log
   paths:
    - '/var/lib/docker/containers/*/*.log'
+# json解码
   json.add_error_key: true
   json.overwrite_keys: true
   json.message_key: log
-  multiline:
-      pattern: ^\d{4}
-      negate: true
-      match: after
+# 多行合并
+#  multiline:
+#    pattern: ^\d{4}
+#    negate: true
+#    match: after
+#
 # 排除或删除通配符行
-  exclude_lines: ['^DBG']
-  include_lines: ['ERROR', 'WARN', 'INFO']
+#  exclude_lines: ['^DBG']
+#  include_lines: ['ERROR', 'WARN', 'INFO']
 # 排除通配文件
 #  exclude_files: ['\.gz$']
+#
+# 添加docker元数据
   processors:
     - add_docker_metadata:
         match_source: true
-#选取添加docker元数据的层级
+# 选取添加docker元数据的层级
         match_source_index: 4
+# 处理器重命名和删除无用字段
 processors:
 - rename:
     fields:
@@ -162,21 +179,25 @@ processors:
      - from: "log.file.path"
        to: "filepath"
 - drop_fields:
-    fields: ["metadata","beat","input","prospector","host","source","offset"]
+    fields: ["docker","metadata","beat","input","prospector","host","source","offset"]
+# 日志输出
 output.logstash: # 输出地址
-  hosts: ["192.168.1.42:5043"]
+  hosts: ["192.168.30.42:5043"]
 #output.elasticsearch:
-#  hosts: ["172.16.131.35:19200"]
+#  hosts: ["192.168.30.42:9200"]
 #  protocol: "http"
 #output.file:
-#  path: "/data/logs"
+#  path: "/tmp"
 #  filename: filebeat.out
 #output.console:
 #  pretty: true
 EOF
 ```  
 
-#### Filebeat 启动命令  
+#### Filebeat 启动命令 
+
+* `-v /var/lib/docker/containers/:/var/lib/docker/containers/` 映射日志目录
+* `-v /var/run/docker.sock:/var/run/docker.sock:ro` 映射docker套接字文件，来收集docker信息，添加docker元数据  
 
 ```bash
 docker run -d \
@@ -195,8 +216,26 @@ docker run -d \
 
 * Filebeat是日志收集客户端，正常情况下其部署在需要收集日志的主机上
 
-###
+### 添加kibana索引
+* 通过服务器IP地址访问Kibana web `http://IP:5601` 同时添加索引  
+![img-w500](/images/201905011954.png)
+
+* 如此便可查看相关日志  
+![img-w500](/images/201905011747.png)
 
 ## ELK之ElastAlert日志告警  
+
+```bash
+git clone https://github.com/bitsensor/elastalert.git; cd elastalert
+docker run -d \
+    -p 3030:3030 \
+    -v `pwd`/config/elastalert.yaml:/opt/elastalert/config.yaml \
+    -v `pwd`/config/config.json:/opt/elastalert-server/config/config.json \
+    -v `pwd`/rules:/opt/elastalert/rules \
+    -v `pwd`/rule_templates:/opt/elastalert/rule_templates \
+    --net="host" \
+    --name elastalert \
+    bitsensor/elastalert:latest
+```
 
 ## 定时删除过期日志索引文件  

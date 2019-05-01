@@ -346,22 +346,24 @@ EOF
 ## 参考文档
 ### ELK
 
-1. 使用Docker搭建ELK日志系统  https://zhuanlan.zhihu.com/p/32559371
-1. Beats详解（四) http://www.51niux.com/?id=204
-1. 设置登录认证: https://birdben.github.io/2017/02/08/Kibana/Kibana学习（六）Kibana设置登录认证
-1. CentOS7 FileBeat 6.2.2 简单记录: https://www.jianshu.com/p/b7245ce58c6a
-1. Offical document: https://www.elastic.co/guide/index.html
-1.  将日志输出到Docker容器外: https://www.jianshu.com/p/bf2eb121ac62
-1. SSL免费证书：https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx
+1. 使用Docker搭建ELK日志系统   <https://zhuanlan.zhihu.com/p/32559371>
+1. Beats详解（四) <http://www.51niux.com/?id=204>
+1. 设置登录认证: <https://birdben.github.io/2017/02/08/Kibana/Kibana学习（六）Kibana设置登录认证>
+1. CentOS7 FileBeat 6.2.2 简单记录: <https://www.jianshu.com/p/b7245ce58c6a>
+1. Offical document: <https://www.elastic.co/guide/index.html>
+1.  将日志输出到Docker容器外: <https://www.jianshu.com/p/bf2eb121ac62>
+1. SSL免费证书 <https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx>
 
 ### Elastalert 
 
-1. elk日志大盘显示和日志监控报警配置实践: https://blog.csdn.net/yujiak/article/details/79897408
-1. ElastAlert: https://github.com/Yelp/elastalert https://elastalert.readthedocs.io/en/latest/
-1. ElastAlert 基于Elasticsearch的监控告警: https://anjia0532.github.io/2017/02/14/elasticsearch-elastalert
-1. ElastAlert: https://blog.xizhibei.me/2017/11/19/alerting-with-elastalert
+1. elastalert github地址： <https://github.com/bitsensor/elastalert>
+1. elastalert-kibana-plugin github地址: <https://github.com/bitsensor/elastalert-kibana-plugin/tree/1.0.2>
+1. elk日志大盘显示和日志监控报警配置实践: <https://blog.csdn.net/yujiak/article/details/79897408>
+1. ElastAlert: <https://github.com/Yelp/elastalert <https://elastalert.readthedocs.io/en/latest/>
+1. ElastAlert 基于Elasticsearch的监控告警: <https://anjia0532.github.io/2017/02/14/elasticsearch-elastalert>
+1. ElastAlert: <https://blog.xizhibei.me/2017/11/19/alerting-with-elastalert>
 
-1. Centos 7 Docker命令自动补全：https://medium.com/@ismailyenigul/enable-docker-command-line-auto-completion-in-bash-on-centos-ubuntu-5f1ac999a8a6
+1. Centos 7 Docker命令自动补全 <https://medium.com/@ismailyenigul/enable-docker-command-line-auto-completion-in-bash-on-centos-ubuntu-5f1ac999a8a6>
 
 ### 索引定期清除
-1. 历史索引删除：http://www.cenhq.com/2017/11/07/elasticsearch-deletes-index-by-date/
+1. 历史索引删除 <http://www.cenhq.com/2017/11/07/elasticsearch-deletes-index-by-date/>

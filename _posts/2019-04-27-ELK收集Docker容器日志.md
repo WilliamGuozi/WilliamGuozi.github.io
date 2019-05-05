@@ -111,19 +111,6 @@ docker run -p 5043:5043 -d \
 
 ### Kibana容器部署  
 
-#### Kibana配置文件说明
-
-```yaml
-
-# Default Kibana configuration from kibana-docker.
-
-server.name: kibana
-server.host: "0"
-elasticsearch.hosts: http://elasticsearch:9200
-xpack.monitoring.ui.container.elasticsearch.enabled: true
-elastalert-kibana-plugin.serverHost: 192.168.30.42
-elastalert-kibana-plugin.serverPort: 3030
-```
 
 * 启动参数参考上述组件  
 
@@ -137,8 +124,6 @@ docker run -p 5601:5601 -d \
     --link elasticsearch \
     --restart=always \
     -e ELASTICSEARCH_URL=http://elasticsearch:9200 \
-    -v /data/conf/kibana.yml:/usr/share/kibana/config/kibana.yml \
-    -v /data/elastalert-kibana-plugin:/usr/share/kibana/plugins/elastalert-kibana-plugin \
     docker.elastic.co/kibana/kibana:6.6.2
 ```
 * 通过服务器IP地址即可访问Kibana web `http://IP:5601`

@@ -246,6 +246,17 @@ docker run -d \
 ## ELK之ElastAlert日志告警  
 
 * ElastAlert分为两部分，后端程序，项目地址 <https://github.com/bitsensor/elastalert>，Kibana前端页面插件地址 <https://github.com/bitsensor/elastalert-kibana-plugin>
+* ElastAlert目前支持的报警类型：
+1. any：只要有匹配就报警；
+1. blacklist：compare_key字段的内容匹配上 blacklist数组里任意内容；
+1. whitelist：compare_key字段的内容一个都没能匹配上whitelist数组里内容；
+1. change：在相同query_key条件下，compare_key字段的内容，在 timeframe范围内发送变化；
+1. frequency：在相同 query_key条件下，timeframe 范围内有num_events个被过滤出来的异常；
+1. spike：在相同query_key条件下，前后两个timeframe范围内数据量相差比例超过spike_height。其中可以通过spike_type设置具体涨跌方向是up,down,both 。还可以通过threshold_ref设置要求上一个周期数据量的下限，threshold_cur设置要求当前周期数据量的下限，如果数据量不到下限，也不触发；
+1. flatline：timeframe 范围内，数据量小于threshold阈值；
+1. new_term：fields字段新出现之前terms_window_size(默认30天)范围内最多的terms_size (默认50)个结果以外的数据；
+1. cardinality：在相同 query_key条件下，timeframe范围内cardinality_field的值超过 max_cardinality 或者低于min_cardinality
+1. Percentage Match: 在buffer_time 中匹配所设置的字段的百分比高于或低于阈值时，此规则将匹配。默认情况下为全局的buffer_time
 
 ### ElastAlert容器启动  
 * `-p 3030:3030` 指定映射端口，该端口需要kibana调用

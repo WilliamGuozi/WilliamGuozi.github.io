@@ -6,13 +6,23 @@ tags: DevOps ELK
 
 ## 简介  
 
+----
+****
+
+
 * 之前写过一篇博客 [ELK：日志收集分析平台](https://www.cnblogs.com/William-Guozi/p/elk.html)，介绍了在Centos7系统上部署配置使用ELK的方法，随着容器化时代的到来，容器化部署成为一种很方便的部署方式，收集容器日志也成为刚需。本篇文档从 **容器化部署ELK系统，收集容器日志，自动建立项目索引，ElastAlert日志监控报警，定时删除过期日志索引文件** 这几个方面来介绍ELK。
 * 大部分配置方法多是看官方文档，理解很辛苦，查了很多文章，走了很多弯路，分享出来，希望让有此需求的朋友少走弯路，如有错误或理解不当的地方，请批评指正。
 * 逻辑结构如下图
 
 ![img-w500](/images/201905051525.png)
 
+&nbsp;
+&nbsp;
+
 ## ELK之容器日志收集及索引建立  
+
+----
+****
 
 * Docker环境下，拉取官方镜像，官方镜像地址 [Docker @ Elastic](https://www.docker.elastic.co)
 ```bash
@@ -228,7 +238,13 @@ docker run -d \
 * 如此便可查看相关日志  
 ![img-w500](/images/201905011747.png)
 
+&nbsp;
+&nbsp;
+
 ## ELK之ElastAlert日志告警  
+
+----
+****
 
 * ElastAlert分为两部分，后端程序，项目地址 <https://github.com/bitsensor/elastalert>，Kibana前端页面插件地址 <https://github.com/bitsensor/elastalert-kibana-plugin>
 * ElastAlert目前支持的报警类型：
@@ -399,7 +415,13 @@ slack_channel_override: "#filebeat-test"
 
 ![img-w500](/images/201905051422.png)
 
+&nbsp;
+&nbsp;
+
 ## 定时删除过期日志索引文件  
+
+----
+****
 
 * 该脚本用于删除7天以前的索引文件（过月日志清除），脚本为参考他人作品，做了少许更改，可查看参考文档
 * `curl -s "http://127.0.0.1:9200/_cat/indices?v"` 该命令可以查看es中的索引
@@ -450,7 +472,14 @@ EOF
 ```
 * 该脚本可以做成定时任务，每天都执行一次，来删除过期数据
 
+&nbsp;
+&nbsp;
+
 ## 参考文档
+
+----
+****
+
 ### ELK
 
 1. 使用Docker搭建ELK日志系统   <https://zhuanlan.zhihu.com/p/32559371>

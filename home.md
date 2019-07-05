@@ -12,7 +12,7 @@
 
 >#### 得到: <https://m.igetget.com/share/user/B9OjzqQRXon1wnVQzz8paeKYGvNyJ5>
 
->#### 微博: <https://weibo.com/u/1002870827 >
+>#### 微博: <https://weibo.com/u/1002870827>
 
 >#### 慕课网: <https://www.imooc.com/u/1044492/courses>
 

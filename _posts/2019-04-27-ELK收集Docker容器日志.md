@@ -404,11 +404,11 @@ alert_text_args:
   - message
 
 
-slack_webhook_url: "https://hooks.slack.com/services/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"
+slack_webhook_url: "https://hooks.slack.com/services/xxxx/xxxxx/xxxxx"
 slack_title_link: "https://elk.glinux.top"
 slack_title: "ELK URL"
 slack_username_override: "ELK Alert"
-slack_channel_override: "#filebeat-test"
+slack_channel_override: "#xxxxx-test"
 ```
 
 * 报警的效果如图  

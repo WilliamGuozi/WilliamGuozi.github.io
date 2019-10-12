@@ -33,6 +33,7 @@ docker run -d \
  graphiteapp/graphite-statsd
 ```
 * 可通过浏览器访问 graphite 页面，`http://10.0.0.1:8880`，默认用户名：root，密码：root，后续要将其加入到grafana的数据源
+
 ## collectd 部署
 ----
 * 替换 `GRAPHITE_HOST` 为你graphite的主机地址，我这里使用域名，方便管理
@@ -46,6 +47,7 @@ docker run -d \
  -e GRAPHITE_HOST=collectd.ops.glinux.top \
  williamguozi/collectd:latest
 ```
+
 ## grafana 部署
 ----
 * 数据做持久存储，可通过 `-v /opt/grafana/grafana.ini:/etc/grafana/grafana.ini`， ` -v /opt/grafana/ldap.toml:/etc/grafana/ldap.toml` 将配置放置外部管理（可选）
@@ -56,6 +58,7 @@ docker run -d \
   -v /opt/grafana:/var/lib/grafana \
   grafana/grafana
 ```
+
 ## grafana 配置
 ----
 * 经过上诉配置，就可以打开grafana的管理界面了，`http://10.0.0.1:3000`，默认用户名：admin，密码：admin
@@ -69,12 +72,15 @@ docker run -d \
 ![img-w500](/images/201910121631.png)
 * 修改 Panel 名称，添加报警规则  
 ![img-w500](/images/201910121735.png)
+
+
 ## 效果展示
 ----
 * 当资源指标达到阈值就会报警到Slack相应的频道  
 ![img-w500](/images/201910121741.png)
 * 另外，可以通过安装 [dashboards](https://grafana.com/grafana/dashboards) 模版使数据展示更漂亮  
 ![img-w500](/images/201910121750.png)
+
 ## 总结
 ----
 * 本文主要就操作系统的基础监控做例子，展示整个部署过程及展示和报警；

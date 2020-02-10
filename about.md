@@ -17,7 +17,7 @@ permalink: /about
 
 正在学习的
 
-[plan](/plan/)
+[William Guozi的摄影课](/photography.md)
 
 
 

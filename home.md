@@ -1,4 +1,10 @@
-## William Guozi的个人小站
+---
+layout: page
+title: "William Guozi的个人小站"
+permalink: /home
+---
+{% include JB/setup %}
+
 
 >#### 博客园: <https://www.cnblogs.com/William-Guozi>
 

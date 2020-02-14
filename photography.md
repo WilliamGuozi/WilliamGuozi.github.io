@@ -5,8 +5,7 @@ permalink: /photography
 ---
 {% include JB/setup %}
 
-
-## apps
+## Apps
 ### Focos
 * 光圈：决定景深，大光圈对应高景深，虚化更强，对焦主题，光斑形状可调节（pro）
 * 镜头：旋转焦外，鱼鳞焦外，气泡焦外，自定义

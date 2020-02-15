@@ -7,12 +7,13 @@ permalink: /about
 
 #### 正在学习的
 
-[William Guozi的摄影课](/photography.md)
+* [William Guozi的摄影课](/photography.md)
 
 #### 2020年度规划
 * 2019 学会了蛙泳，实践了Docker，看过了大海，坚持健身和学习，坚持的魔力斑斓梦幻
 * 2020 年度规划，春天会迟到，但从不会缺席
 ##### 习惯养成:
+
 ```
 * 坚持早睡早起
 * 坚持每日健身，keep打卡
@@ -23,6 +24,7 @@ permalink: /about
 # * Accomplished
 # ** To be done
 ```
+
 ##### 目标达成:
 ```
 * 系统学习Python并实践

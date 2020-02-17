@@ -8,6 +8,7 @@ permalink: /about
 #### 正在学习的
 
 * [William Guozi的摄影课](/photography.md)
+* [William Guozi的英语课](/english.md)
 
 #### 2020年度规划
 * 2019 学会了蛙泳，实践了Docker，看过了大海，坚持健身和学习；坚持的魔力斑斓梦幻

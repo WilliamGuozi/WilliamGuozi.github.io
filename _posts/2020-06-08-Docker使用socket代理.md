@@ -11,6 +11,8 @@ tags: DevOps Linux
 * 据我所知，目前存在的拉取失败，要么是国内服务器拉取国外镜像仓库镜像失败，比如 docker.io、us.gcr.io；或国外服务器拉取国内镜像仓库镜像失败，比如 registry.cn-hangzhou.aliyuncs.com
 * 当然我们可以通过 在能够拉取的地方下载镜像命令 `docker save -o myimages.gz williamguozi/httpd:v0.1 williamguozi/httpd:v0.2`，之后在该服务器上加载该镜像 `docker load -i myimages.gz`, 偶尔一两次还可以，持续更新就很难接受了
 * 今天就将该代理方式介绍给大家，希望对需要的小伙伴有所帮助
+* 逻辑结构如图
+![img-w500](/images/202006081723.png)
 
 <font color="#dd0000">所有操作在需要拉取镜像的服务器上执行</font>
 ## 依赖环境

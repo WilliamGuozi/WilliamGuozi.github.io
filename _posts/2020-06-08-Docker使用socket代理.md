@@ -12,10 +12,10 @@ tags: DevOps Linux
 * 当然我们可以通过 在能够拉取的地方下载镜像命令 `docker save -o myimages.gz williamguozi/httpd:v0.1 williamguozi/httpd:v0.2`，之后在该服务器上加载该镜像 `docker load -i myimages.gz`, 偶尔一两次还可以，持续更新就很难接受了
 * 今天就将该代理方式介绍给大家，希望对需要的小伙伴有所帮助
 
-> 所有操作在需要拉取镜像的服务器上执行
-
+<font color="#dd0000">所有操作在需要拉取镜像的服务器上执行</font>
 ## 依赖环境
 * 该依赖是shadowsock运行环境所需要的库
+
 ```bash
 apt update
 apt-get install build-essential wget -y
@@ -71,8 +71,8 @@ systemctl enable privoxy
 
 ## docker 使用代理
 * 首先需检测docker重启是否会导致容器重启
-* <font color="#dd0000">该配置文件需要有如下配置，否则重启docker服务会导致所有容器重启</font><br />
-* <font color="#dd0000">如果之前没有该配置，添加后，第一次重启仍然会导致所有容器重启</font><br />
+* <font color="#dd0000">该配置文件需要有如下配置，否则重启docker服务会导致所有容器重启</font>
+* <font color="#dd0000">如果之前没有该配置，添加后，第一次重启仍然会导致所有容器重启</font>
 
 ```bash
 cat > /etc/docker/daemon.json << EOF
@@ -86,10 +86,12 @@ cat docker.service |grep process
 # kill only the docker process, not all processes in the cgroup
 KillMode=process
 ```
+
 * 修改容器服务启动参数
 * `Environment=HTTP_PROXY=http://127.0.0.1:8118/` `Environment=HTTPS_PROXY=http://127.0.0.1:8118/` 代理http https
 * `Environment=NO_PROXY=localhost,127.0.0.1,docker.io` 不要代理的镜像仓库源域名，否则将全部代理
-```
+
+```bash
 vim /etc/systemd/system/multi-user.target.wants/docker.service
 [Service]
 Environment=HTTP_PROXY=http://127.0.0.1:8118/

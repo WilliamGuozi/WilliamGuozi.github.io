@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Grafana & Graphite & Collectd监控系统"
+title: "Grafana Graphite Collectd监控系统"
 tags: DevOps Monitor
 ---
 

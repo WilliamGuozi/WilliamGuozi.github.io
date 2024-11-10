@@ -100,8 +100,8 @@ var jiathis_config = {data_track_clickback:'true'};
 <section id="comments">
 <div id="container"></div>
 
-<link rel="stylesheet" href="https://unpkg.com/gitment@latest/dist/gitment.css">
-<script src="https://unpkg.com/gitment@latest/dist/gitment.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <!--
 <link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
 <script src="https://billts.site/js/gitment.js"></script>
@@ -109,15 +109,27 @@ var jiathis_config = {data_track_clickback:'true'};
 <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 -->
 <script>
-var gitment = new Gitment({
-  id : '{{ page.date }}',
-  owner: 'WilliamGuozi',
-  repo: 'WilliamGuozi.github.io',
-  oauth: {
-    client_id: '87272c8d5bc6da27f030',
-    client_secret: 'f2dd03098c753b637185567d93d914a401b6e723',
-  },
-})
-gitment.render('container')
+  var gitalk = new Gitalk({
+    id : '{{ page.date }}',
+    clientID: 'Ov23liYMTcCj7jSHkscy',
+    clientSecret: '9010cd8831b3b3b2803e0fb1f144d9b11da06e70',
+    repo: 'WilliamGuozi.github.io',
+    owner: 'WilliamGuozi',
+    admin: ['WilliamGuozi'],
+    distractionFreeMode: false // 开启或关闭干扰最小模式
+  });
+  gitalk.render('gitalk-container');
 </script>
+<!--<script>-->
+<!--var gitment = new Gitment({-->
+<!--  id : '{{ page.date }}',-->
+<!--  owner: 'WilliamGuozi',-->
+<!--  repo: 'WilliamGuozi.github.io',-->
+<!--  oauth: {-->
+<!--    client_id: '87272c8d5bc6da27f030',-->
+<!--    client_secret: 'f2dd03098c753b637185567d93d914a401b6e723',-->
+<!--  },-->
+<!--})-->
+<!--gitment.render('container')-->
+<!--</script>-->
 </section>

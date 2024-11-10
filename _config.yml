@@ -86,7 +86,7 @@ JB :
   archive_path: /archive.html
   categories_path : /categories.html
   tags_path : /tags
-  homes_path: /home
+  homes_path: /
   atom_path : /atom.xml
   rss_path : /feed.xml
   messages_path : /messages

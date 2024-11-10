@@ -33,9 +33,10 @@ permalink: /about
 * 学习摄影、拍照和视频剪辑
 * 理财的研究和实践
 ```
-
+<!--
 
 <img style="margin-top: 30px;" src="{{ ASSET_PATH }}/img/seal.png">
+-->
 
 #### 必然熟悉进而精通的
 

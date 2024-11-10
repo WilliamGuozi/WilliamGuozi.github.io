@@ -5,7 +5,7 @@ permalink: /home
 ---
 {% include JB/setup %}
 
-
+<!--
 >#### 博客园: <https://www.cnblogs.com/William-Guozi>
 
 >#### Github: <https://github.com/WilliamGuozi>
@@ -26,7 +26,7 @@ permalink: /home
 
 >#### 简书: <https://www.jianshu.com/u/3e9414a1682b>
 
-<!--
+
 >#### 腾讯课堂: <https://ke.qq.com/user/index/index.html#sid=signup>
 
 >#### 51CTO学院: <http://edu.51cto.com/center/course/user/study-info>

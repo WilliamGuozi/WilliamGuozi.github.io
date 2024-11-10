@@ -2,8 +2,8 @@
 layout: page
 title: 标签
 header: Posts By Tag
-comments: false
 permalink: /tags
+comments: False
 ---
 {% include JB/setup %}
 

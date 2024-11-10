@@ -2,7 +2,6 @@
 layout: post
 title: "Docker 使用socket 代理"
 tags: DevOps Linux
-comments: true
 ---
 
 ## 简介

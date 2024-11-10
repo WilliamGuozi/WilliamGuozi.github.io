@@ -97,7 +97,7 @@ JB :
   # Set 'provider' to false to turn commenting off globally.
   #
   comments :
-    provider : xxx 
+    provider : gitment
     duoshuo :
       short_name : william
     disqus :
